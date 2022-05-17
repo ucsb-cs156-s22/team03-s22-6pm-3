@@ -4,7 +4,7 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Articles</h1>
+        <h1>UCSB Dining Commons Menu Item</h1>
         <p>
           This is where the index page will go
         </p>
