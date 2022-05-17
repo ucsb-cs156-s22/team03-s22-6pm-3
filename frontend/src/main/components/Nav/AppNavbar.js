@@ -74,6 +74,16 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
+
+
+
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
+                    <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
             </Nav>
 
             <Nav className="ml-auto">
