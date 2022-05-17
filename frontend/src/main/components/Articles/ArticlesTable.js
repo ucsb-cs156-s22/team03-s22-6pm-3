@@ -23,11 +23,7 @@ export default function ArticlesTable({ articles, _currentUser }) {
     // Stryker disable next-line all : TODO try to make a good test for this
     // const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
     
-    //String title
-    //String url
-    //String explanation
-    //String email (of person that submitted it)
-    //LocalDateTime dateAdded
+    
     const columns = [
         {
             Header: 'Title',
@@ -46,7 +42,7 @@ export default function ArticlesTable({ articles, _currentUser }) {
             accessor: 'email',
         },
         {
-            Header: 'DateAdded',
+            Header: 'Date Added',
             accessor: 'dateAdded',
         }
     ];
