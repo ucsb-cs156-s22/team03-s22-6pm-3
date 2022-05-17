@@ -8,10 +8,14 @@ import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
 import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";//changed org
+//import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";//changed article
 
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
+
+
 
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
@@ -40,6 +44,27 @@ function App() {
             </>
           )
         }
+        {/* Menu Item */}
+        {/* Organizaton */}
+        {//Org
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/UCSBOrganization/list" element={<UCSBOrganizationIndexPage />} />
+            </>
+          )
+        }
+        {/* Recommendation */}
+        {/* Review */}
+        {/* Help Request */}
+        {/* Article */}
+        {//Article
+          /*hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/articles/list" element={<ArticlesIndexPage />} />
+            </>
+          )*/
+        }
+
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>

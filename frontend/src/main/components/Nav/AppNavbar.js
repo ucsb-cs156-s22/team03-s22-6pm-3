@@ -47,7 +47,30 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
+
+              {/* Menu Item */}
+              {/* Organizaton */}
+
+              {//changed here
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSB Organizations" id="appnavbar-UCSBOrganization-dropdown" data-testid="appnavbar-todos-dropdown" >
+                    <NavDropdown.Item as={Link} to="/UCSBOrganization/list">List Organizations</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/UCSBOrganization/create">Create Organization</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+              {/* Recommendation */}
+              {/* Review */}
+              {/* Help Request */}
+              {/* Article */}
               {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Articles" id="appnavbar-articles-dropdown" data-testid="appnavbar-articles-dropdown" >
+                    <NavDropdown.Item as={Link} to="/articles/list">List Articles</NavDropdown.Item> 
+                  </NavDropdown>
+                )
+              }
+              {//from base code
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Todos" id="appnavbar-todos-dropdown" data-testid="appnavbar-todos-dropdown" >
                     <NavDropdown.Item as={Link} to="/todos/list">List Todos</NavDropdown.Item>
@@ -55,7 +78,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-               {
+              {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="UCSB Dining Commons" id="appnavbar-dining-commons-dropdown" data-testid="appnavbar-dining-commons-dropdown" >
                     <NavDropdown.Item as={Link} to="/diningCommons/list" data-testid="appnavbar-dining-commons-list">List Dining Commons</NavDropdown.Item>
