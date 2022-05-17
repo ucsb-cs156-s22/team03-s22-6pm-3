@@ -45,7 +45,7 @@ export default function UCSBOrganizationTable({ UCSBOrganization, currentUser })
         },
         {
             Header: 'inactive',
-            accessor: 'inactive',
+            //accessor: 'inactive',
             accessor: (row, _rowIndex) => String(row.inactive) // hack needed for boolean values to show up
 
         }
