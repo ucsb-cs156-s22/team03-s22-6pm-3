@@ -2,7 +2,7 @@ import OurTable/*, { ButtonColumn }*/ from "main/components/OurTable";
 import { _useBackendMutation } from "main/utils/useBackend";
 //import { _cellToAxiosParamsDelete, _onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
 import { useNavigate } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";
+import { hasRole } from "main/utils/currentUser";//test
 
 export default function UCSBOrganizationTable({ UCSBOrganization, currentUser }) {
 
