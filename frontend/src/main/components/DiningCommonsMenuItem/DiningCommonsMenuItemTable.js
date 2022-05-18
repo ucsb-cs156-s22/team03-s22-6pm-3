@@ -16,7 +16,7 @@ import OurTable from "main/components/OurTable";
     // const deleteMutation = useBackendMutation(
     //     cellToAxiosParamsDelete,
     //     { onSuccess: onDeleteSuccess },
-    //     ["/api/ucsbdates/all"]
+    //     ["/api/UCSBDiningCommonsMenuItem/all"]
     // );
     // Stryker enable all 
 
@@ -50,11 +50,11 @@ import OurTable from "main/components/OurTable";
 
     // const columnsIfAdmin = [
     //     ...columns,
-    //     ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-    //     ButtonColumn("Delete", "danger", deleteCallback, "UCSBDatesTable")
+    //     // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
+    //     ButtonColumn("Delete", "danger", deleteCallback, "DiningCommonsMenuItemTable")
     // ];
 
-    // // const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
+    // const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
      const columnsToDisplay = columns;
 
     return <OurTable
