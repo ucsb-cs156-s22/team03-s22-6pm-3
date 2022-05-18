@@ -1,9 +1,9 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
-import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable"
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
-import { currentUserFixtures } from "fixtures/currentUserFixtures";
+import { _fireEvent, _render, _waitFor } from "@testing-library/react";
+import { _ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
+import _UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable"
+import { QueryClient, _QueryClientProvider } from "react-query";
+import { _MemoryRouter } from "react-router-dom";
+import { _currentUserFixtures } from "fixtures/currentUserFixtures";
 
 
 const mockedNavigate = jest.fn();
@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe("UCSBOrganizationTable tests", () => {
-  const queryClient = new QueryClient();
+  _const queryClient = new QueryClient();
 
   /*
   test("renders without crashing for empty table with user not logged in", () => {//
@@ -68,9 +68,9 @@ describe("UCSBOrganizationTable tests", () => {
 
     );
     */
-    const expectedHeaders = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
-    const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
-    const testId = "UCSBOrganizationTable";
+    _const expectedHeaders = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
+    _const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
+    _const testId = "UCSBOrganizationTable";
 
     // expectedHeaders.forEach((headerText) => {
     //   const header = getByText(headerText);

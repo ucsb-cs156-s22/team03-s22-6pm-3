@@ -49,12 +49,12 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               }
 
               {/* Menu Item */}
-              {
+              {/*
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
                     <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
                   </NavDropdown>
-                )
+                )*/
               }
               {/* Organizaton */}
               {//changed here
@@ -67,29 +67,35 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               }
               {/* Recommendation */}
               {//not inputted
+              /*
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Recommendations" id="appnavbar-recommendations-dropdown" data-testid="appnavbar-recommendations-dropdown" >
                     <NavDropdown.Item as={Link} to="/recommendations/list" data-testid="appnavbar-recommendations-list">List Recommendations</NavDropdown.Item>
                   </NavDropdown>
                 )
+                */
               }
               {/* Review */}
               {
                 /* adds Review to navigation bar */
+                /*
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Reviews" id="appnavbar-reviews-dropdown" data-testid="appnavbar-reviews-dropdown" >
                     <NavDropdown.Item as={Link} to="/reviews/list" data-testid="appnavbar-reviews-list">List Reviews</NavDropdown.Item>
                   </NavDropdown>
                 )
+                */
               }
               {/* Help Request */}
               {/* Article */}
               {
+                /*
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Articles" id="appnavbar-articles-dropdown" data-testid="appnavbar-articles-dropdown" >
                     <NavDropdown.Item as={Link} to="/articles/list">List Articles</NavDropdown.Item> 
                   </NavDropdown>
                 )
+                */
               }
               {//from base code
                 hasRole(currentUser, "ROLE_USER") && (
