@@ -1,4 +1,5 @@
-import OurTable, { ButtonColumn} from "main/components/OurTable";
+//import OurTable, { ButtonColumn} from "main/components/OurTable";
+import OurTable from "main/components/OurTable";
 //import { useBackendMutation } from "main/utils/useBackend";
 //import {  onDeleteSuccess } from "main/utils/UCSBDateUtils"
 // import { useNavigate } from "react-router-dom";
@@ -45,15 +46,15 @@ export default function ReviewsTable({ reviews, currentUser }) {
         },
         {
             Header: 'Reviewer\'s Email',
-            id: 'reviewerEmail', 
+            accessor: 'reviewerEmail', 
         },
         {
             Header: 'Stars',
-            id: 'stars', 
+            accessor: 'stars', 
         },
         {
             Header: 'Date Reviewed',
-            id: 'dateReviewed', 
+            accessor: 'dateReviewed', 
         },
         {
             Header: 'Comments',
