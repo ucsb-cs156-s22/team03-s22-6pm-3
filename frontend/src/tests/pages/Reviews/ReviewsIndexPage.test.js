@@ -1,5 +1,5 @@
-//import { fireEvent, render, waitFor } from "@testing-library/react";
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
+//import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
@@ -27,7 +27,7 @@ describe("ReviewsIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    //const testId = "ReviewsTable";
+    const testId = "ReviewsTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -47,8 +47,7 @@ describe("ReviewsIndexPage tests", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
 
-        /* will be uncommented when the db is set up */
-        //axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, []);
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -63,8 +62,7 @@ describe("ReviewsIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        /* will be uncommented when the db is set up */
-        // axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, []); 
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, []); 
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,6 +72,42 @@ describe("ReviewsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
+
+    });
+
+    test("renders one review without crashing for regular user", async () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <ReviewsIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
+        expect(getByTestId(`${testId}-cell-row-0-col-reviewerEmail`)).toHaveTextContent("y@ucsb.edu");
+
+    });
+
+    test("renders one review without crashing for admin user", async () => {
+        setupAdminUser();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <ReviewsIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
+        expect(getByTestId(`${testId}-cell-row-0-col-reviewerEmail`)).toHaveTextContent("y@ucsb.edu");
 
     });
 
