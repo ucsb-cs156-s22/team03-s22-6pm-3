@@ -1,27 +1,27 @@
 import React from 'react';
 
-import ArticlesTable from "main/components/Articles/ArticlesTable";
-import { articlesFixtures } from 'fixtures/articlesFixtures';
+import ArticleTable from "main/components/Article/ArticleTable";
+import { articleFixtures } from 'fixtures/articleFixtures';
 
 export default {
-    title: 'components/Articles/ArticlesTable',
-    component: ArticlesTable
+    title: 'components/Article/ArticleTable',
+    component: ArticleTable
 };
 
 const Template = (args) => {
     return (
-        <ArticlesTable {...args} />
+        <ArticleTable {...args} />
     )
 };
 
 export const Empty = Template.bind({});
 
 Empty.args = {
-    articles: []
+    article: []
 };
 
 export const ThreeArticles = Template.bind({});
 
 ThreeArticles.args = {
-    articles: articlesFixtures.threeArticles
+    article: articleFixtures.threeArticles
 };
