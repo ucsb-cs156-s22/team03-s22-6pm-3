@@ -1,5 +1,5 @@
 import OurTable, { ButtonColumn} from "main/components/OurTable";
-import OurTable from "main/components/OurTable";
+//import OurTable from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import {  onDeleteSuccess } from "main/utils/UCSBDateUtils"
 // import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export function cellToAxiosParamsDelete(cell) {
         url: "/api/MenuItemReview",
         method: "DELETE",
         params: {
-            code: cell.row.values.code
+            id: cell.row.values.id
         }
     }
 }
