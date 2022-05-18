@@ -38,7 +38,7 @@ export default function ArticlesTable({ articles, currentUser }) {
     
     const columns = [
         {
-            Header: 'Id',
+            Header: 'id',
             accessor: 'id',
         },
         {
