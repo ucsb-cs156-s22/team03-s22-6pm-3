@@ -13,7 +13,7 @@ import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizat
 //import RecommendationIndexPage from "main/pages/Recommendation/RecommendationIndexPage";
 //import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
 //Help Request
-//import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";//changed article
+//import ArticleIndexPage from "main/pages/Article/ArticleIndexPage";//changed article
 
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
@@ -86,7 +86,7 @@ function App() {
         {//Article
           /*hasRole(currentUser, "ROLE_USER") && (
             <>
-              <Route exact path="/articles/list" element={<ArticlesIndexPage />} />
+              <Route exact path="/article/list" element={<ArticleIndexPage />} />
             </>
           )*/
         }
