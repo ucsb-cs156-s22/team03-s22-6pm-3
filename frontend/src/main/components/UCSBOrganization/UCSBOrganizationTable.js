@@ -1,17 +1,19 @@
 import OurTable/*, { ButtonColumn }*/ from "main/components/OurTable";
-//import { useBackendMutation } from "main/utils/useBackend";
-//import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
-//import { useNavigate } from "react-router-dom";
+import { _useBackendMutation } from "main/utils/useBackend";
+import { _cellToAxiosParamsDelete, _onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
+import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
 export default function UCSBOrganizationTable({ UCSBOrganization, currentUser }) {
 
-    //const navigate = useNavigate();//
+    const _navigate = useNavigate();//
 
-    // const editCallback = (cell) => {//
+    // const _editCallback = (cell) => {//
     //     navigate(`/UCSBOrganization/edit/${cell.row.values.id}`)
     // }
 
+
+//
     // Stryker disable all : hard to test for query caching
     // const deleteMutation = useBackendMutation(//
     //     cellToAxiosParamsDelete,
@@ -23,17 +25,10 @@ export default function UCSBOrganizationTable({ UCSBOrganization, currentUser })
     // Stryker disable next-line all : TODO try to make a good test for this
     //const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }//
 
-    /*
-    "orgCode": "A",
-    "orgTranslationShort": "ABC",
-    "orgTranslation": "AB",
-    "inactive": false
-    */
-
     const columns = [
         {
             Header: 'orgCode',
-            accessor: 'orgCode', // accessor is the "key" in the data
+            accessor: 'orgCode',
         },
         {
             Header: 'orgTranslationShort',
@@ -45,7 +40,7 @@ export default function UCSBOrganizationTable({ UCSBOrganization, currentUser })
         },
         {
             Header: 'inactive',
-            accessor: 'inactive',
+            //accessor: 'inactive',
             accessor: (row, _rowIndex) => String(row.inactive) // hack needed for boolean values to show up
 
         }
