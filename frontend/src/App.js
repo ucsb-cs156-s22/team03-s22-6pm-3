@@ -17,6 +17,7 @@ import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCBSDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 
 
+import ArticleIndexPage from "main/pages/Article/ArticleIndexPage";
 
 import ArticleIndexPage from "main/pages/Article/ArticleIndexPage";
 
