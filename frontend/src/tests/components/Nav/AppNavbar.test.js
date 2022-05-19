@@ -232,7 +232,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId(/appnavbar-help-review-list/)).toBeInTheDocument() );
+        await waitFor( () => expect(getByTestId("appnavbar-help-request-list")).toBeInTheDocument() );
 
     })
 
