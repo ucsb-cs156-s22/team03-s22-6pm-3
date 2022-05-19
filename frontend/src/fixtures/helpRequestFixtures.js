@@ -1,6 +1,6 @@
 const helpRequestFixtures = {
     oneHelpRequest: {
-        "id": "id",
+        "id": 1,
         "requesterEmail": "requesterEmail",
         "teamId": "teamId",
         "tableOrBreakoutRoom": "tableOrBreakoutRoom" ,
@@ -9,7 +9,7 @@ const helpRequestFixtures = {
         "solved": true
     },
     threeHelpRequests: [ {
-        "id": "id",
+        "id": 1,
         "requesterEmail": "requesterEmail",
         "teamId": "teamId",
         "tableOrBreakoutRoom": "tableOrBreakoutRoom" ,
@@ -18,7 +18,7 @@ const helpRequestFixtures = {
         "solved": true
     },
     {
-        "id": "id2",
+        "id": 2,
         "requesterEmail": "requesterEmail2",
         "teamId": "teamId2",
         "tableOrBreakoutRoom": "tableOrBreakoutRoom2" ,
@@ -27,7 +27,7 @@ const helpRequestFixtures = {
         "solved": false
     },
     {
-        "id": "id",
+        "id": 3,
         "requesterEmail": "requesterEmail3",
         "teamId": "teamId3",
         "tableOrBreakoutRoom": "tableOrBreakoutRoom3" ,

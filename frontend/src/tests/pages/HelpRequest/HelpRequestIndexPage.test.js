@@ -85,9 +85,9 @@ describe("HelpRequestIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("1"); } );
-        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("2");
-        expect(getByTestId(`${testId}-cell-row-3-col-id`)).toHaveTextContent("3");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     });
 
@@ -105,9 +105,9 @@ describe("HelpRequestIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("1"); } );
-        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("2");
-        expect(getByTestId(`${testId}-cell-row-3-col-id`)).toHaveTextContent("3");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     });
 
@@ -115,7 +115,7 @@ describe("HelpRequestIndexPage tests", () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/HelpRequest/all").timeout();
+        axiosMock.onGet("/api/helprequest/all").timeout();
 
         const { queryByTestId, getByText } = render(
             <QueryClientProvider client={queryClient}>
@@ -142,7 +142,7 @@ describe("HelpRequestIndexPage tests", () => {
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestFixtures.threeHelpRequests);
-        axiosMock.onDelete("/api/helprequest", {params: {id: "2"}}).reply(200, "HelpRequest with id 2 was deleted.");
+        axiosMock.onDelete("/api/helprequest").reply(200, "HelpRequest with id 1 was deleted");
 
 
         const { getByTestId } = render(

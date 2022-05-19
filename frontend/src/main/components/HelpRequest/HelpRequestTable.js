@@ -8,25 +8,24 @@ export function cellToAxiosParamsDelete(cell) {
     return {
         url: "/api/helprequest",
         method: "DELETE",
-        params: {
-            id: cell.row.values.id
-        }
+        // Stryker disable next-line all
+        params: {id: cell.row.values.id}
     }
 }
 
 export default function HelpRequestTable({ helpRequest, currentUser }) {
 
-    // const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    // const editCallback = (cell) => {
-    //     navigate(`/ucsbdates/edit/${cell.row.values.id}`)
-    // }
+    //const editCallback = (cell) => {
+      //   navigate(`/ucsbdates/edit/${cell.row.values.id}`)
+    //}
 
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/article/all"]
+        ["/api/helprequest/all"]
     );
     // Stryker enable all 
 
@@ -69,7 +68,7 @@ export default function HelpRequestTable({ helpRequest, currentUser }) {
 
     const columnsIfAdmin = [
         ...columns,
-        // ButtonColumn("Edit", "primary", editCallback, testid),
+        //ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];
 
