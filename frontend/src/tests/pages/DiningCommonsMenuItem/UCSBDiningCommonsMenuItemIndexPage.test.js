@@ -25,7 +25,7 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    const testId = "DiningCommonsMenuItemTable";
+    // const testId = "DiningCommonsMenuItemTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -34,12 +34,12 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
 
-    const setupAdminUser = () => {
-        axiosMock.reset();
-        axiosMock.resetHistory();
-        axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
-        axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-    };
+    // const setupAdminUser = () => {
+    //     axiosMock.reset();
+    //     axiosMock.resetHistory();
+    //     axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
+    //     axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+    // };
 
     test("renders without crashing for regular user", () => {
         setupUserOnly();
