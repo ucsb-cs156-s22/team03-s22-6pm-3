@@ -60,7 +60,7 @@ describe("HelpRequestTable tests", () => {
         const { getByText, getByTestId } = render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <HelpRequestTable diningCommons={helpRequestFixtures.threeHelpRequests} currentUser={currentUser} />
+              <HelpRequestTable helpRequest={helpRequestFixtures.threeHelpRequests} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
     
@@ -82,5 +82,9 @@ describe("HelpRequestTable tests", () => {
     
         expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
         expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
+
+        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+        expect(deleteButton).toBeInTheDocument();
+        expect(deleteButton).toHaveClass("btn-danger");
     });
 });

@@ -1,10 +1,10 @@
-import { _fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-//import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
+import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import _mockConsole from "jest-mock-console";
@@ -19,11 +19,11 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("ReviewsIndexPage tests", () => {
+describe("HelpRequestIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    const testId = "ReviewsTable";
+    const testId = "HelpRequestTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -59,7 +59,7 @@ describe("ReviewsIndexPage tests", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
 
-        axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, []); 
+        axiosMock.onGet("/api/helprequest/all").reply(200, []); 
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -72,10 +72,10 @@ describe("ReviewsIndexPage tests", () => {
 
     });
 
-    test("renders one review without crashing for regular user", async () => {
+    test("renders three help requests without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+        axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestFixtures.threeHelpRequests);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -85,15 +85,16 @@ describe("ReviewsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
-        expect(getByTestId(`${testId}-cell-row-0-col-reviewerEmail`)).toHaveTextContent("y@ucsb.edu");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-3-col-id`)).toHaveTextContent("3");
 
     });
 
-    test("renders one review without crashing for admin user", async () => {
+    test("renders three help requests without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+        axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestFixtures.threeHelpRequests);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -103,8 +104,9 @@ describe("ReviewsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
-        expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-3-col-id`)).toHaveTextContent("3");
 
     });
 
@@ -112,7 +114,7 @@ describe("ReviewsIndexPage tests", () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/MenuItemReview/all").timeout();
+        axiosMock.onGet("/api/HelpRequest/all").timeout();
 
         const { queryByTestId, getByText } = render(
             <QueryClientProvider client={queryClient}>
@@ -132,5 +134,35 @@ describe("ReviewsIndexPage tests", () => {
         });
 
         expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+    });
+
+    test("test what happens when you click delete, admin", async () => {
+        setupAdminUser();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestFixtures.threeHelpRequests);
+        axiosMock.onDelete("/api/helprequest", {params: {id: "2"}}).reply(200, "Help request with id 2 was deleted.");
+
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <HelpRequestIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toBeInTheDocument(); });
+
+       expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); 
+
+
+        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+        expect(deleteButton).toBeInTheDocument();
+       
+        fireEvent.click(deleteButton);
+
+        await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommons with id de-la-guerra was deleted") });
+
     });
 });
