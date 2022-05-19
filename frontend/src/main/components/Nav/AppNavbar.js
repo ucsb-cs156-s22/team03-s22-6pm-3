@@ -47,7 +47,19 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-              {
+
+
+              {/* Organizaton */}
+              {//changed here
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSB Organizations" id="appnavbar-UCSBOrganization-dropdown" data-testid="appnavbar-UCSBOrganization-dropdown" /*change here*/>
+                    <NavDropdown.Item as={Link} to="/UCSBOrganization/list" data-testid="appnavbar-UCSBOrganization-list">List Organizations</NavDropdown.Item>
+                    //<NavDropdown.Item as={Link} to="/UCSBOrganization/create" data-testid="appnavbar-UCSBOrganization-create">Create Organization</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+             
+              {//from base code
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Todos" id="appnavbar-todos-dropdown" data-testid="appnavbar-todos-dropdown" >
                     <NavDropdown.Item as={Link} to="/todos/list">List Todos</NavDropdown.Item>
@@ -56,6 +68,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
+
                 /* adds Review to navigation bar */
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Reviews" id="appnavbar-reviews-dropdown" data-testid="appnavbar-reviews-dropdown" >

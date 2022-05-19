@@ -8,6 +8,7 @@ import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
 import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";//changed org
 
 import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
 
@@ -15,6 +16,8 @@ import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCBSDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
+
+
 
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
@@ -43,6 +46,18 @@ function App() {
             </>
           )
         }
+
+        {/* Organizaton */}
+        {//Org
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/UCSBOrganization/list" element={<UCSBOrganizationIndexPage />} />
+            </>
+          )
+        }
+  
+
+
          {
           hasRole(currentUser, "ROLE_USER") && (
             <>
@@ -50,6 +65,7 @@ function App() {
             </>
           )
         }
+
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
