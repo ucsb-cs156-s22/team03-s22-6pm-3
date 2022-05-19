@@ -1,4 +1,5 @@
-import { _fireEvent, render, _waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
+//import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
@@ -6,10 +7,10 @@ import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizat
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-//import { UCSBOrganizationFixtures } from "fixtures/UCSBOrganizationFixtures";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import _mockConsole from "jest-mock-console";
+import mockConsole from "jest-mock-console";
 
 
 const mockToast = jest.fn();
@@ -22,11 +23,11 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("UCSBOrganizationPage tests", () => {
+describe("UCSBOrganizationIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    //const testId = "UCSBOrganizationTable";
+    const testId = "UCSBOrganizationTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -45,7 +46,7 @@ describe("UCSBOrganizationPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/UCSBOrganization/all").reply(200, []);
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -61,7 +62,7 @@ describe("UCSBOrganizationPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/UCSBOrganization/all").reply(200, []);
+        axiosMock.onGet("/api/ucsborganizations/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,41 +75,41 @@ describe("UCSBOrganizationPage tests", () => {
 
     });
 
-    /*test("renders three diningCommon without crashing for regular user", async () => {
+    test("renders three orgs without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, diningCommonsFixtures.threeCommons);
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrgs);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <DiningCommonsIndexPage />
+                    <UCSBOrganizationIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); } );
-        expect(getByTestId(`${testId}-cell-row-1-col-code`)).toHaveTextContent("ortega");
-        expect(getByTestId(`${testId}-cell-row-2-col-code`)).toHaveTextContent("portola");
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("A"); });
+        expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("HCH");
+        expect(getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("NLA");
 
     });
 
-    test("renders three diningCommons without crashing for admin user", async () => {
+    test("renders three orgs without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, diningCommonsFixtures.threeCommons);
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrgs);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <DiningCommonsIndexPage />
+                    <UCSBOrganizationIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); });
-        expect(getByTestId(`${testId}-cell-row-1-col-code`)).toHaveTextContent("ortega");
-        expect(getByTestId(`${testId}-cell-row-2-col-code`)).toHaveTextContent("portola");
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("A"); });
+        expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("HCH");
+        expect(getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("NLA");
 
     });
 
@@ -116,47 +117,43 @@ describe("UCSBOrganizationPage tests", () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdiningcommons/all").timeout();
+        axiosMock.onGet("/api/ucsborganization/all").timeout();
 
-        const { queryByTestId, getByText } = render(
+        const restoreConsole = mockConsole();
+
+        const { queryByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <DiningCommonsIndexPage />
+                    <UCSBOrganizationIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
+        await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
+        restoreConsole();
 
-        const expectedHeaders = ['Code',  'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
-    
-        expectedHeaders.forEach((headerText) => {
-          const header = getByText(headerText);
-          expect(header).toBeInTheDocument();
-        });
-
-        expect(queryByTestId(`${testId}-cell-row-0-col-code`)).not.toBeInTheDocument();
+        expect(queryByTestId(`${testId}-cell-row-0-col-orgCode`)).not.toBeInTheDocument();
     });
 
     test("test what happens when you click delete, admin", async () => {
         setupAdminUser();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, diningCommonsFixtures.threeCommons);
-        axiosMock.onDelete("/api/ucsbdiningcommons", {params: {code: "de-la-guerra"}}).reply(200, "DiningCommons with id de-la-guerra was deleted");
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrgs);
+        axiosMock.onDelete("/api/ucsborganization").reply(200, "UCSBOrganization with orgCode A was deleted");
 
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <DiningCommonsIndexPage />
+                    <UCSBOrganizationIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toBeInTheDocument(); });
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toBeInTheDocument(); });
 
-       expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); 
+       expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("A"); 
 
 
         const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
@@ -164,10 +161,10 @@ describe("UCSBOrganizationPage tests", () => {
        
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommons with id de-la-guerra was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBOrganization with orgCode A was deleted") });
 
     });
-*/
+
 });
 
 
