@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useSortBy } from 'react-table'
 import { Table, Button } from "react-bootstrap";
 
-export default function OurTable({ columns, data, testid = "testid" }) {
+export default function OurTable({ columns, data, testid = "testid"}) {
 
   const {
     getTableProps,
@@ -83,7 +83,7 @@ export default function OurTable({ columns, data, testid = "testid" }) {
 //   ButtonColumn("Delete", "danger", deleteCallback)
 // ];
 
-export function ButtonColumn(label, variant, callback, testid) {
+export function ButtonColumn(label, variant, callback, testid, idfield="id") {
   const column = {
     Header: label,
     id: label,
@@ -91,7 +91,7 @@ export function ButtonColumn(label, variant, callback, testid) {
       <Button
         variant={variant}
         onClick={() => callback(cell)}
-        data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
+        data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column[idfield]}-button`}
       >
         {label}
       </Button>

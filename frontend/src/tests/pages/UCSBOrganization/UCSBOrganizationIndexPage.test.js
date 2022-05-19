@@ -1,4 +1,4 @@
-import { _fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 //import { render } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -132,15 +132,15 @@ describe("UCSBOrganizationIndexPage tests", () => {
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
         restoreConsole();
 
-        expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+        expect(queryByTestId(`${testId}-cell-row-0-col-orgCode`)).not.toBeInTheDocument();
     });
-/*
+
     test("test what happens when you click delete, admin", async () => {
         setupAdminUser();
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrgs);
-        axiosMock.onDelete("/api/ucsborganization").reply(200, "UCSBOrganization with id A was deleted");
+        axiosMock.onDelete("/api/ucsborganization").reply(200, "UCSBOrganization with orgCode A was deleted");
 
 
         const { getByTestId } = render(
@@ -161,10 +161,10 @@ describe("UCSBOrganizationIndexPage tests", () => {
        
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBOrganization with id A was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBOrganization with orgCode A was deleted") });
 
     });
-*/
+
 });
 
 

@@ -1,8 +1,20 @@
-import OurTable/*, { ButtonColumn }*/ from "main/components/OurTable";
-import { _useBackendMutation } from "main/utils/useBackend";
-//import { _cellToAxiosParamsDelete, _onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
+import OurTable, { ButtonColumn } from "main/components/OurTable";
+import { useBackendMutation } from "main/utils/useBackend";
+import { /*cellToAxiosParamsDelete,*/ onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
 import { useNavigate } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";//test
+import { hasRole } from "main/utils/currentUser";
+
+export function cellToAxiosParamsDelete(cell) {
+    return {
+        url: "/api/ucsborganization",
+        method: "DELETE",
+        params: {
+            orgCode: cell.row.values.orgCode
+        }
+    }
+}
+
+
 
 export default function UCSBOrganizationTable({ UCSBOrganization, currentUser }) {
 
@@ -13,17 +25,16 @@ export default function UCSBOrganizationTable({ UCSBOrganization, currentUser })
     // }
 
 
-//
     // Stryker disable all : hard to test for query caching
-    // const deleteMutation = useBackendMutation(//
-    //     cellToAxiosParamsDelete,
-    //     { onSuccess: onDeleteSuccess },
-    //     ["/api/UCSBOrganization/all"]
-    // );
+    const deleteMutation = useBackendMutation(//
+        cellToAxiosParamsDelete,
+        { onSuccess: onDeleteSuccess },
+        ["/api/ucsborganization/all"]
+    );
     // Stryker enable all 
 
     // Stryker disable next-line all : TODO try to make a good test for this
-    //const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }//
+    const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
     const columns = [
         {
@@ -49,7 +60,7 @@ export default function UCSBOrganizationTable({ UCSBOrganization, currentUser })
     const columnsIfAdmin = [//
         ...columns,
         //ButtonColumn("Edit", "primary", editCallback, "UCSBOrganizationTable"),
-        //ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationTable")
+        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationTable")
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
