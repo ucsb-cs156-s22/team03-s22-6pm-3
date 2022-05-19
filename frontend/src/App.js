@@ -8,12 +8,8 @@ import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
 import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
-//import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
-import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";//changed org
-//import RecommendationIndexPage from "main/pages/Recommendation/RecommendationIndexPage";
-//import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
-//Help Request
-//import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";//changed article
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+
 
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
@@ -48,48 +44,18 @@ function App() {
             </>
           )
         }
-        {/* Menu Item */}
-        {/*
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/diningCommons/list" element={<DiningCommonsIndexPage />} />
-            </>
-          )*/
-        }
-        {/* Organizaton */}
-        {//Org
+
+
+        {/* Organizaton */
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/UCSBOrganization/list" element={<UCSBOrganizationIndexPage />} />
             </>
           )
         }
-        {/* Recommendation */
-        /*
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
-            </>
-          )
-          */
-        }
-        {/* Review */}
-        {/*
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
-            </>
-          )*/
-        } 
-        {/* Help Request *//*TEMPORARY PLACEHOLDER> UPDATE WHEN MITCH SENDS IN CODE*/}
-        {/* Article */}
-        {//Article
-          /*hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/articles/list" element={<ArticlesIndexPage />} />
-            </>
-          )*/
-        }
+
+
+
 
         {
           hasRole(currentUser, "ROLE_USER") && (
