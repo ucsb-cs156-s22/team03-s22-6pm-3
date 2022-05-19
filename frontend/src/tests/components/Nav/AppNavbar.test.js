@@ -260,8 +260,6 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId(/appnavbar-reviews-list/)).toBeInTheDocument() );
 
     });
-   
-});
 
     test("renders the menuItem menu correctly for an admin", async () => {
 
