@@ -18,7 +18,6 @@ import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCBSDiningCommonsMenu
 
 
 
-
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -94,6 +93,13 @@ function App() {
            </>
          )
          */
+        }
+        {
+         hasRole(currentUser, "ROLE_USER") && (
+           <>
+             <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
+           </>
+         )
         }
         {
           hasRole(currentUser, "ROLE_USER") && (
