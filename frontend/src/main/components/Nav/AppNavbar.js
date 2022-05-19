@@ -75,7 +75,16 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
             </Nav>
+            
 
+
+            {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
+                    <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list" data-testid="appnavbar-ucsb-dinning-commons-menu-item-list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {
