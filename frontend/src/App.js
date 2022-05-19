@@ -45,6 +45,13 @@ function App() {
             </>
           )
         }
+        {//Org
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/DiningCommons/list" element={<DiningCommonsIndexPage />} />
+            </>
+          )
+        }
 
         {/* Organizaton */}
         {//Org
@@ -54,7 +61,7 @@ function App() {
             </>
           )
         }
-         {
+        {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
@@ -62,13 +69,14 @@ function App() {
           )
         }
 
-        {
+        {/*
           hasRole(currentUser, "ROLE_USER") && (
             <>
 
               <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
             </>
           )
+          */
         } 
 
 
@@ -79,12 +87,13 @@ function App() {
             </>
           )
         }
-        {
+        {/*
          hasRole(currentUser, "ROLE_USER") && (
            <>
              <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
            </>
          )
+         */
         }
         {
           hasRole(currentUser, "ROLE_USER") && (
