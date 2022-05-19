@@ -97,6 +97,13 @@ function App() {
          */
         }
         {
+         hasRole(currentUser, "ROLE_USER") && (
+           <>
+             <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
+           </>
+         )
+        }
+        {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/article/list" element={<ArticleIndexPage />} />
