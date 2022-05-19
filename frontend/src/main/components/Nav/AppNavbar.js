@@ -50,29 +50,28 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
 
 
               {/* Organizaton */}
-              {//changed here
+              {
                 hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="UCSB Organizations" id="appnavbar-UCSBOrganization-dropdown" data-testid="appnavbar-UCSBOrganization-dropdown" /*change here*/>
+                  <NavDropdown title="UCSB Organizations" id="appnavbar-UCSBOrganization-dropdown" data-testid="appnavbar-UCSBOrganization-dropdown" >
                     <NavDropdown.Item as={Link} to="/UCSBOrganization/list" data-testid="appnavbar-UCSBOrganization-list">List Organizations</NavDropdown.Item>
-                    //<NavDropdown.Item as={Link} to="/UCSBOrganization/create" data-testid="appnavbar-UCSBOrganization-create">Create Organization</NavDropdown.Item>
                   </NavDropdown>
                 )
               }
              
-              {//from base code
-                hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="Todos" id="appnavbar-todos-dropdown" data-testid="appnavbar-todos-dropdown" >
-                    <NavDropdown.Item as={Link} to="/todos/list">List Todos</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/todos/create">Create Todo</NavDropdown.Item>
-                  </NavDropdown>
-                )
-              }
               {
 
                 /* adds Review to navigation bar */
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Reviews" id="appnavbar-reviews-dropdown" data-testid="appnavbar-reviews-dropdown" >
                     <NavDropdown.Item as={Link} to="/reviews/list" data-testid="appnavbar-reviews-list">List Reviews</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
+                    <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list" data-testid="appnavbar-ucsb-dinning-commons-menu-item-list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
                   </NavDropdown>
                 )
               }
@@ -95,27 +94,17 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-
-
-
               {
                 hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
-                    <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list" data-testid="appnavbar-ucsb-dinning-commons-menu-item-list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
+                  <NavDropdown title="Todos" id="appnavbar-todos-dropdown" data-testid="appnavbar-todos-dropdown" >
+                    <NavDropdown.Item as={Link} to="/todos/list">List Todos</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/todos/create">Create Todo</NavDropdown.Item>
                   </NavDropdown>
                 )
               }
             </Nav>
             
 
-
-            {
-                hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="UCSB Dining Commons Menu Item" id="appnavbar-ucsb-dinning-commons-menu-item-dropdown" data-testid="appnavbar-ucsb-dinning-commons-menu-item-dropdown" >
-                    <NavDropdown.Item as={Link} to="/UCSBDiningCommonsMenuItem/list" data-testid="appnavbar-ucsb-dinning-commons-menu-item-list">List UCSB Dining Commons Menu Item</NavDropdown.Item>
-                  </NavDropdown>
-                )
-              }
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {
