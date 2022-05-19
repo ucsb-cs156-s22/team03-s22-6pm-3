@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 
 import UCSBOrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
 import { ucsbOrganizationFixtures } from 'fixtures/ucsbOrganizationFixtures';
@@ -25,5 +25,5 @@ export const ThreeOrgs = Template.bind({});
 ThreeOrgs.args = {
     UCSBOrganization: ucsbOrganizationFixtures.threeOrgs
 };
-
+*/
 
