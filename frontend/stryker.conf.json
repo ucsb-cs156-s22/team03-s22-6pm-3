@@ -11,6 +11,7 @@
     "jest": {
         "projectType": "create-react-app"
     },
+    "tempDirName": "strykerTmp",
     "mutate": [
         "src/main/**/*.{js,jsx,ts,tsx}",
         "!src/main/**/*_NoStryker.{js,jsx,ts,tsx}"
