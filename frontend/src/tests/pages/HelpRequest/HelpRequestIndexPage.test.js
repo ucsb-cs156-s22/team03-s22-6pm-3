@@ -91,6 +91,7 @@ describe("HelpRequestIndexPage tests", () => {
 
     });
 
+
     test("renders three help requests without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
@@ -126,7 +127,7 @@ describe("HelpRequestIndexPage tests", () => {
 
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
 
-        const expectedHeaders = ['Id',  'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation', 'Solved'];
+        const expectedHeaders = ['Id', 'Requester Email', 'Team Id','Table or Breakout Room','Request Time','Explanation', 'Solved'];
 
         expectedHeaders.forEach((headerText) => {
           const header = getByText(headerText);
@@ -141,7 +142,7 @@ describe("HelpRequestIndexPage tests", () => {
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestFixtures.threeHelpRequests);
-        axiosMock.onDelete("/api/helprequest", {params: {id: "2"}}).reply(200, "Help request with id 2 was deleted.");
+        axiosMock.onDelete("/api/helprequest", {params: {id: "2"}}).reply(200, "HelpRequest with id 2 was deleted.");
 
 
         const { getByTestId } = render(
@@ -152,9 +153,9 @@ describe("HelpRequestIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toBeInTheDocument(); });
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument(); });
 
-       expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); 
+       expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); 
 
 
         const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
@@ -162,7 +163,7 @@ describe("HelpRequestIndexPage tests", () => {
        
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommons with id de-la-guerra was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("HelpRequest with id 1 was deleted") });
 
     });
 });
