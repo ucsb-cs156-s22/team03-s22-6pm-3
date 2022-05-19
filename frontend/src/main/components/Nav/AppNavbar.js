@@ -83,6 +83,13 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
               {
+               hasRole(currentUser, "ROLE_USER") && (
+                 <NavDropdown title="Recommendations" id="appnavbar-recommendation-dropdown" data-testid="appnavbar-recommendation-dropdown" >
+                   <NavDropdown.Item as={Link} to="/recommendations/list" data-testid="appnavbar-recommendation-list">List Recommendations</NavDropdown.Item>
+                 </NavDropdown>
+               )
+             }
+              {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Article" id="appnavbar-article-dropdown" data-testid="appnavbar-article-dropdown" >
                     <NavDropdown.Item as={Link} to="/article/list" data-testid="appnavbar-article-list">List Articles</NavDropdown.Item>

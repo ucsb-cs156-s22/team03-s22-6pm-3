@@ -30,7 +30,7 @@ describe("AppNavbar tests", () => {
         );
         await waitFor(() => expect(getByText("Welcome, phtcon@ucsb.edu")).toBeInTheDocument());
         const adminMenu = getByTestId("appnavbar-admin-dropdown");
-        expect(adminMenu).toBeInTheDocument();        
+        expect(adminMenu).toBeInTheDocument();
     });
     test("renders H2Console and Swagger links correctly", async () => {
         const currentUser = currentUserFixtures.adminUser;
@@ -45,7 +45,7 @@ describe("AppNavbar tests", () => {
         );
         await waitFor(() => expect(getByText("H2Console")).toBeInTheDocument());
         const swaggerMenu = getByText("Swagger");
-        expect(swaggerMenu).toBeInTheDocument();        
+        expect(swaggerMenu).toBeInTheDocument();
     });
     test("renders the todos menu correctly", async () => {
         const currentUser = currentUserFixtures.userOnly;
@@ -250,6 +250,7 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId(/appnavbar-ucsb-dinning-commons-menu-item-list/)).toBeInTheDocument() );
 
     });
+
     test("renders the article menu correctly for an admin", async () => {
 
         const currentUser = currentUserFixtures.adminUser;
@@ -273,8 +274,29 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId(/appnavbar-article-list/)).toBeInTheDocument() );
 
     });
-    
-   
+
+    test("renders the recommendation menu correctly for an admin", async () => {
+
+        const currentUser = currentUserFixtures.adminUser;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        const {getByTestId  } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => expect(getByTestId("appnavbar-recommendation-dropdown")).toBeInTheDocument());
+        const dropdown = getByTestId("appnavbar-recommendation-dropdown");
+        const aElement = dropdown.querySelector("a");
+        expect(aElement).toBeInTheDocument();
+        aElement?.click();
+        await waitFor( () => expect(getByTestId(/appnavbar-recommendation-list/)).toBeInTheDocument() );
+
+    });
+
 });
-
-
