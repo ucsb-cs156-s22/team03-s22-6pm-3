@@ -8,7 +8,7 @@ export default {
     component: UCSBOrganizationIndexPage
 };
 
-const Template = () => <ReviewsIndexPage />;
+const Template = () => <UCSBOrganizationIndexPage />;
 
 export const Default = Template.bind({});
 
