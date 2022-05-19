@@ -1,11 +1,15 @@
+
 import { _fireEvent, render, waitFor } from "@testing-library/react";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCBSDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+
 import { UCSBDiningCommonsMenuItemFixtures } from "fixtures/UCSBDiningCommonsMenuItemFixtures";
+
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import _mockConsole from "jest-mock-console";
@@ -25,7 +29,9 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
+
     const testId = "DiningCommonsMenuItemTable";
+
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -34,12 +40,14 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
 
+
     const setupAdminUser = () => {
         axiosMock.reset();
         axiosMock.resetHistory();
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
+
 
     test("renders without crashing for regular user", () => {
         setupUserOnly();
@@ -56,6 +64,7 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
 
 
     });
+
 
     test("renders without crashing for admin user", () => {
         setupAdminUser();
@@ -168,3 +177,4 @@ describe("UCSBDiningCommonsIndexPage tests", () => {
     // });
 
 });   
+
