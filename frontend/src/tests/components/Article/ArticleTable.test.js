@@ -90,9 +90,9 @@ describe("Article tests", () => {
     // expect(editButton).toBeInTheDocument();
     // expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    expect(deleteButton).toHaveClass("btn-danger");
+    // const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    // expect(deleteButton).toBeInTheDocument();
+    // expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
@@ -113,7 +113,7 @@ describe("Article tests", () => {
 
   //   const editButton = getByTestId(`UCSBDatesTable-cell-row-0-col-Edit-button`);
   //   expect(editButton).toBeInTheDocument();
-    
+
   //   fireEvent.click(editButton);
 
   //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbdates/edit/1'));
