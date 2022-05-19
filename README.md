@@ -5,7 +5,7 @@
 
 TODO: Add a link to the deployed Heroku app for your team here, e.g.
 
-* <https://s22-7pm-3-team02.herokuapp.com>
+* <https://s22-6pm-3-team02.herokuapp.com>
 * 
 
 * Storybook (production): <https://ucsb-cs156-s22.github.io/team03-s22-6pm-3-docs>
