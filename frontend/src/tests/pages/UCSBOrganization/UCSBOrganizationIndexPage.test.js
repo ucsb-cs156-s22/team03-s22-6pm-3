@@ -74,7 +74,7 @@ describe("UCSBOrganizationPage tests", () => {
 
     });
 
-    /*test("renders three diningCommon without crashing for regular user", async () => {
+    test("renders three diningCommon without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, diningCommonsFixtures.threeCommons);
@@ -167,7 +167,7 @@ describe("UCSBOrganizationPage tests", () => {
         await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommons with id de-la-guerra was deleted") });
 
     });
-*/
+
 });
 
 
