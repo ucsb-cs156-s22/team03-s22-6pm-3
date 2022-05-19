@@ -6,7 +6,7 @@ import { hasRole } from "main/utils/currentUser";
 
 export function cellToAxiosParamsDelete(cell) {
     return {
-        url: "/api/article",
+        url: "/api/Article",
         method: "DELETE",
         params: {
             id: cell.row.values.id
@@ -26,7 +26,7 @@ export default function ArticleTable({ article, currentUser }) {
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/article/all"]
+        ["/api/Article/all"]
     );
     // Stryker enable all 
 
@@ -34,6 +34,18 @@ export default function ArticleTable({ article, currentUser }) {
     const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
     const columns = [
+        {
+            Header: 'Date Added',
+            accessor: 'dateAdded',
+        },
+        {
+            Header: 'Email',
+            accessor: 'email', 
+        },
+        {
+            Header: 'Explanation',
+            accessor: 'explanation', 
+        },
         {
             Header: 'ID',
             accessor: 'id', 
@@ -45,27 +57,18 @@ export default function ArticleTable({ article, currentUser }) {
         {
             Header: 'URL',
             accessor: 'url', 
-        },
-        {
-            Header: 'Explanation',
-            accessor: 'explanation', 
-        },
-        {
-            Header: 'Email',
-            accessor: 'email', 
-        },
-        {
-            Header: 'Date Added',
-            accessor: 'dateAdded',
         }
+       
+        
+       
     ];
 
-    const testid = "ArticleTable";
+    // const testid = "ArticleTable";
 
     const columnsIfAdmin = [
         ...columns,
         // ButtonColumn("Edit", "primary", editCallback, testid),
-        ButtonColumn("Delete", "danger", deleteCallback, testid)
+        ButtonColumn("Delete", "danger", deleteCallback, "ArticleTable")
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
@@ -75,6 +78,6 @@ export default function ArticleTable({ article, currentUser }) {
     return <OurTable
         data={article}
         columns={columnsToDisplay}
-        testid={testid}
+        testid={"ArticleTable"}
     />;
 };
