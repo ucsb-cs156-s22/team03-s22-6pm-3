@@ -4,20 +4,20 @@ const UCSBDiningCommonsMenuItemFixtures = {
             "diningCommonsCode": "de-la-guerra",
             "id": "1",
             "name": "pizza",
-            "station": false,
+            "station": "pizza corner",
 
         },
         {
             "diningCommonsCode": "de-la-guerra",
             "id": "2",
             "name": "noodles",
-            "station": false,
+            "station": "Blue Plate",
         },
         {
             "diningCommonsCode": "de-la-guerra",
             "id": "3",
             "name": "bread",
-            "station": false,
+            "station": "soup",
         } 
     ]
 };
