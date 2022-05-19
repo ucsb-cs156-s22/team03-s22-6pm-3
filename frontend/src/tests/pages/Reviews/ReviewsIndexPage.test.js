@@ -1,5 +1,5 @@
 //import { fireEvent, render, waitFor } from "@testing-library/react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
@@ -27,7 +27,7 @@ describe("ReviewsIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    //const testId = "ReviewsTable";
+    const testId = "ReviewsTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -47,8 +47,7 @@ describe("ReviewsIndexPage tests", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
 
-        /* will be uncommented when the db is set up */
-        //axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, []);
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -63,8 +62,7 @@ describe("ReviewsIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        /* will be uncommented when the db is set up */
-        // axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, []); 
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, []); 
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,6 +72,42 @@ describe("ReviewsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
+
+    });
+
+    test("renders one review without crashing for regular user", async () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <ReviewsIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
+        expect(getByTestId(`${testId}-cell-row-0-col-reviewerEmail`)).toHaveTextContent("y@ucsb.edu");
+
+    });
+
+    test("renders one review without crashing for admin user", async () => {
+        setupAdminUser();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/MenuItemReview/all").reply(200, [{"id": 0, "itemId": 1, "reviewerEmail": "y@ucsb.edu", "stars": 3, "dateReviewed": "2022-05-18T07:06:00", "comments": "This is a test w/o using fixtures"}]);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <ReviewsIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("0"); } );
+        expect(getByTestId(`${testId}-cell-row-0-col-reviewerEmail`)).toHaveTextContent("y@ucsb.edu");
 
     });
 
@@ -115,31 +149,31 @@ describe("ReviewsIndexPage tests", () => {
 
     // });
 
-    // test("renders empty table when backend unavailable, user only", async () => {
-    //     setupUserOnly();
+    test("renders empty table when backend unavailable, user only", async () => {
+        setupUserOnly();
 
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/ucsbdiningcommons/all").timeout();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/MenuItemReview/all").timeout();
 
-    //     const { queryByTestId, getByText } = render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <DiningCommonsIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
+        const { queryByTestId, getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <ReviewsIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
 
-    //     await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
+        await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
 
-    //     const expectedHeaders = ['Code',  'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
+        const expectedHeaders = ['Id',  'Item Id', 'Reviewer\'s Email','Stars','Date Reviewed','Comments'];
     
-    //     expectedHeaders.forEach((headerText) => {
-    //       const header = getByText(headerText);
-    //       expect(header).toBeInTheDocument();
-    //     });
+        expectedHeaders.forEach((headerText) => {
+          const header = getByText(headerText);
+          expect(header).toBeInTheDocument();
+        });
 
-    //     expect(queryByTestId(`${testId}-cell-row-0-col-code`)).not.toBeInTheDocument();
-    // });
+        expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+    });
 
     // test("test what happens when you click delete, admin", async () => {
     //     setupAdminUser();
