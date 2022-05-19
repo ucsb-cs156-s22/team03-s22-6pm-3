@@ -12,9 +12,7 @@ import { onDeleteSuccess } from "main/utils/UCSBDateUtils";
         }
     }
 }
-
 export default function DiningCommonsMenuItemTable({ UCSBDiningCommonsMenuItem, currentUser }) {
- 
     // const navigate = useNavigate();
 
     // const editCallback = (cell) => {
@@ -30,7 +28,7 @@ export default function DiningCommonsMenuItemTable({ UCSBDiningCommonsMenuItem, 
     // Stryker enable all 
 
     // Stryker disable next-line all : TODO try to make a good test for this
-    const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
+   const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
 //    {
 //     "id": 1,
