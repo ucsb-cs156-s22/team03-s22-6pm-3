@@ -8,9 +8,8 @@ export function cellToAxiosParamsDelete(cell) {
     return {
         url: "/api/ucsborganization",
         method: "DELETE",
-        params: {
-            orgCode: cell.row.values.orgCode
-        }
+        // Stryker disable next-line all
+        params: {orgCode: cell.row.values.orgCode}
     }
 }
 
