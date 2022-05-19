@@ -45,7 +45,7 @@ describe("UCSBDatesIndexPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").reply(200, []);
+        axiosMock.onGet("/api/Article/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -61,7 +61,7 @@ describe("UCSBDatesIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").reply(200, []);
+        axiosMock.onGet("/api/Article/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -77,7 +77,7 @@ describe("UCSBDatesIndexPage tests", () => {
     test("renders three articles without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").reply(200, articleFixtures.threeArticles);
+        axiosMock.onGet("/api/Article/all").reply(200, articleFixtures.threeArticles);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -96,7 +96,7 @@ describe("UCSBDatesIndexPage tests", () => {
     test("renders three articles without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").reply(200, articleFixtures.threeArticles);
+        axiosMock.onGet("/api/Article/all").reply(200, articleFixtures.threeArticles);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -116,7 +116,7 @@ describe("UCSBDatesIndexPage tests", () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").timeout();
+        axiosMock.onGet("/api/Article/all").timeout();
 
         const restoreConsole = mockConsole();
 
@@ -138,8 +138,8 @@ describe("UCSBDatesIndexPage tests", () => {
         setupAdminUser();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/article/all").reply(200, articleFixtures.threeArticles);
-        axiosMock.onDelete("/api/article", {params: {id: 1}}).reply(200, "Article with id 1 was deleted"); // 
+        axiosMock.onGet("/api/Article/all").reply(200, articleFixtures.threeArticles);
+        axiosMock.onDelete("/api/Article", {params: {id: 1}}).reply(200, "Article with id 1 was deleted"); // 
         // Make sure types match in params for the sake of testing
 
         const { getByTestId } = render(
