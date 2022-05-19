@@ -1,11 +1,20 @@
-import OurTable from "main/components/OurTable";
-// import { useBackendMutation } from "main/utils/useBackend";
-// import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBDateUtils"
-// import { useNavigate } from "react-router-dom";
-// import { hasRole } from "main/utils/currentUser";
+import OurTable, {ButtonColumn} from "main/components/OurTable";
+ import { useBackendMutation } from "main/utils/useBackend";
+import { onDeleteSuccess } from "main/utils/UCSBDateUtils";
+//  import { useNavigate } from "react-router-dom";
+ import { hasRole } from "main/utils/currentUser";
+ export function cellToAxiosParamsDelete(cell) {
+    return {
+        url: "/api/UCSBDiningCommonsMenuItem",
+        method: "DELETE",
+        params: {
+            id: cell.row.values.id
+        }
+    }
+}
 
-// export default function DiningCommonsMenuItemTable({ UCSBDiningCommonsMenuItem, currentUser }) {
-    export default function DiningCommonsMenuItemTable({ UCSBDiningCommonsMenuItem }) {
+export default function DiningCommonsMenuItemTable({ UCSBDiningCommonsMenuItem, currentUser }) {
+ 
     // const navigate = useNavigate();
 
     // const editCallback = (cell) => {
@@ -13,15 +22,15 @@ import OurTable from "main/components/OurTable";
     // }
 
     // Stryker disable all : hard to test for query caching
-    // const deleteMutation = useBackendMutation(
-    //     cellToAxiosParamsDelete,
-    //     { onSuccess: onDeleteSuccess },
-    //     ["/api/UCSBDiningCommonsMenuItem/all"]
-    // );
+    const deleteMutation = useBackendMutation(
+        cellToAxiosParamsDelete,
+        { onSuccess: onDeleteSuccess },
+        ["/api/UCSBDiningCommonsMenuItem/all"]
+    );
     // Stryker enable all 
 
     // Stryker disable next-line all : TODO try to make a good test for this
-   // const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
+    const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
 //    {
 //     "id": 1,
@@ -48,14 +57,14 @@ import OurTable from "main/components/OurTable";
         }
     ];
 
-    // const columnsIfAdmin = [
-    //     ...columns,
-    //     // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-    //     ButtonColumn("Delete", "danger", deleteCallback, "DiningCommonsMenuItemTable")
-    // ];
+    const columnsIfAdmin = [
+        ...columns,
+        // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
+        ButtonColumn("Delete", "danger", deleteCallback, "DiningCommonsMenuItemTable")
+    ];
 
-    // const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
-     const columnsToDisplay = columns;
+    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
+    //  const columnsToDisplay = columns;
 
     return <OurTable
         data={UCSBDiningCommonsMenuItem}
