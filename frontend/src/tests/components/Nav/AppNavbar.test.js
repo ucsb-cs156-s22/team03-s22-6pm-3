@@ -259,5 +259,8 @@ describe("AppNavbar tests", () => {
         aElement?.click();
         await waitFor( () => expect(getByTestId(/appnavbar-ucsb-dinning-commons-menu-item-list/)).toBeInTheDocument() );
 
-        });
     });
+   
+
+   
+});
