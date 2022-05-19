@@ -10,9 +10,12 @@ import TodosEditPage from "main/pages/Todos/TodosEditPage";
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";//changed org
 
+import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
+
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
+import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCBSDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 
 
 
@@ -43,6 +46,7 @@ function App() {
             </>
           )
         }
+
         {/* Organizaton */}
         {//Org
           hasRole(currentUser, "ROLE_USER") && (
@@ -53,12 +57,35 @@ function App() {
         }
   
 
+
+         {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/reviews/list" element={<ReviewsIndexPage />} />
+            </>
+          )
+        }
+
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/diningCommons/list" element={<DiningCommonsIndexPage />} />
             </>
           )
+        }
+         {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
+            </>
+          )
+        }
+        {
+         hasRole(currentUser, "ROLE_USER") && (
+           <>
+             <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
+           </>
+         )
         }
         {
           hasRole(currentUser, "ROLE_USER") && (
