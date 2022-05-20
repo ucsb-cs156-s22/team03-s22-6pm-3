@@ -22,6 +22,6 @@ Empty.args = {
 
 export const ThreeHelpRequests = Template.bind({});
 
-ThreeHelpRequests.args = {
+ThreeHelpRequests.args = { 
     helpRequest: helpRequestFixtures.threeHelpRequests
 }; 
