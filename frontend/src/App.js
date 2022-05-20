@@ -8,6 +8,9 @@ import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
 import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
 import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexPage";
+
+import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
+
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";//changed org
 import ReviewsIndexPage from "main/pages/Reviews/ReviewsIndexPage";
 
@@ -80,29 +83,19 @@ function App() {
           )
           */
         } 
-
-
-         {
+        {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
             </>
           )
         }
-        {/*
-         hasRole(currentUser, "ROLE_USER") && (
-           <>
-             <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
-           </>
-         )
-         */
-        }
         {
-         hasRole(currentUser, "ROLE_USER") && (
-           <>
-             <Route exact path="/UCSBDiningCommonsMenuItem/list" element={<UCSBDiningCommonsMenuItemIndexPage />} />
-           </>
-         )
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+            <Route exact path = "/helpRequest/list" element={<HelpRequestIndexPage/>} />
+            </>
+          )
         }
         {
           hasRole(currentUser, "ROLE_USER") && (
