@@ -17,11 +17,11 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 
 Empty.args = {
-    request: []
+    helpRequest: []
 };
 
 export const ThreeHelpRequests = Template.bind({});
 
 ThreeHelpRequests.args = {
-    request: helpRequestFixtures.threeHelpRequests
+    helpRequest: helpRequestFixtures.threeHelpRequests
 }; 
