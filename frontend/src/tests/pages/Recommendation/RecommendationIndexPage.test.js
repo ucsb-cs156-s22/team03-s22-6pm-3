@@ -1,4 +1,4 @@
-import { /*fireEvent,*/ render/*, waitFor*/ } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import RecommendationIndexPage from "main/pages/Recommendation/RecommendationIndexPage";
@@ -6,7 +6,7 @@ import RecommendationIndexPage from "main/pages/Recommendation/RecommendationInd
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-// import { recommendationFixtures } from "fixtures/recommendationFixtures";
+import { recommendationFixtures } from "fixtures/recommendationFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import _mockConsole from "jest-mock-console";
@@ -26,7 +26,7 @@ describe("RecommendationIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    // const testId = "RecommendationTable";
+    const testId = "RecommendationTable";
 
     const setupUserOnly = () => {
         axiosMock.reset();
@@ -45,7 +45,7 @@ describe("RecommendationIndexPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendation/all").reply(200, []);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -61,7 +61,7 @@ describe("RecommendationIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/recommendation/all").reply(200, []);
+        axiosMock.onGet("/api/Recommendation/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,98 +74,98 @@ describe("RecommendationIndexPage tests", () => {
 
     });
 
-    // test("renders three recommendations without crashing for regular user", async () => {
-    //     setupUserOnly();
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/recommendation/all").reply(200, diningCommonsFixtures.threeCommons);
-    //
-    //     const { getByTestId } = render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RecommendationIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-    //
-    //     await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); } );
-    //     expect(getByTestId(`${testId}-cell-row-1-col-code`)).toHaveTextContent("ortega");
-    //     expect(getByTestId(`${testId}-cell-row-2-col-code`)).toHaveTextContent("portola");
-    //
-    // });
+    test("renders three recommendations without crashing for regular user", async () => {
+        setupUserOnly();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationFixtures.threeRecommendations);
 
-    // test("renders three recommendations without crashing for admin user", async () => {
-    //     setupAdminUser();
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/ucsbdiningcommons/all").reply(200, diningCommonsFixtures.threeCommons);
-    //
-    //     const { getByTestId } = render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RecommendationIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-    //
-    //     await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra"); });
-    //     expect(getByTestId(`${testId}-cell-row-1-col-code`)).toHaveTextContent("ortega");
-    //     expect(getByTestId(`${testId}-cell-row-2-col-code`)).toHaveTextContent("portola");
-    //
-    // });
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <RecommendationIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
 
-    // test("renders empty table when backend unavailable, user only", async () => {
-    //     setupUserOnly();
-    //
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/recommendation/all").timeout();
-    //
-    //     const { queryByTestId, getByText } = render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RecommendationIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-    //
-    //     await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
-    //
-    //     const expectedHeaders = ['Code',  'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
-    //
-    //     expectedHeaders.forEach((headerText) => {
-    //       const header = getByText(headerText);
-    //       expect(header).toBeInTheDocument();
-    //     });
-    //
-    //     expect(queryByTestId(`${testId}-cell-row-0-col-code`)).not.toBeInTheDocument();
-    // });
+        await waitFor(  () => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); } );
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
-    // test("test what happens when you click delete, admin", async () => {
-    //     setupAdminUser();
-    //
-    //     const queryClient = new QueryClient();
-    //     axiosMock.onGet("/api/recommendation/all").reply(200, diningCommonsFixtures.threeCommons);
-    //     axiosMock.onDelete("/api/recommendation", {params: {code: "de-la-guerra"}}).reply(200, "DiningCommons with id de-la-guerra was deleted");
-    //
-    //
-    //     const { getByTestId } = render(
-    //         <QueryClientProvider client={queryClient}>
-    //             <MemoryRouter>
-    //                 <RecommendationIndexPage />
-    //             </MemoryRouter>
-    //         </QueryClientProvider>
-    //     );
-    //
-    //     await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-code`)).toBeInTheDocument(); });
-    //
-    //    expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra");
-    //
-    //
-    //     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    //     expect(deleteButton).toBeInTheDocument();
-    //
-    //     fireEvent.click(deleteButton);
-    //
-    //     await waitFor(() => { expect(mockToast).toBeCalledWith("DiningCommons with id de-la-guerra was deleted") });
-    //
-    // });
+    });
+
+    test("renders three recommendations without crashing for admin user", async () => {
+        setupAdminUser();
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationFixtures.threeRecommendations);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <RecommendationIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); });
+        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
+
+    });
+
+    test("renders empty table when backend unavailable, user only", async () => {
+        setupUserOnly();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/Recommendation/all").timeout();
+
+        const { queryByTestId, getByText } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <RecommendationIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(3); });
+
+        const expectedHeaders = ['id',  'Date Needed', 'Date Requested','Professor Email','Requester Email','Explanation','Done?'];
+
+        expectedHeaders.forEach((headerText) => {
+          const header = getByText(headerText);
+          expect(header).toBeInTheDocument();
+        });
+
+        expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+    });
+
+    test("test what happens when you click delete, admin", async () => {
+        setupAdminUser();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/Recommendation/all").reply(200, recommendationFixtures.threeRecommendations);
+        axiosMock.onDelete("/api/Recommendation", {params: {id: 1}}).reply(200, "Recommendation with id 1 deleted");
+
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <RecommendationIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument(); });
+
+       expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+
+
+        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+        expect(deleteButton).toBeInTheDocument();
+
+        fireEvent.click(deleteButton);
+
+        await waitFor(() => { expect(mockToast).toBeCalledWith("Recommendation with id 1 deleted") });
+
+    });
 
 });

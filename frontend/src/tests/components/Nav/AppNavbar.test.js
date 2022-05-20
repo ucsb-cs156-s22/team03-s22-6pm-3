@@ -328,7 +328,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+      const {getByTestId  } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -342,7 +342,6 @@ describe("AppNavbar tests", () => {
         expect(aElement).toBeInTheDocument();
         aElement?.click();
         await waitFor( () => expect(getByTestId(/appnavbar-recommendation-list/)).toBeInTheDocument() );
-
     });
 
 });
