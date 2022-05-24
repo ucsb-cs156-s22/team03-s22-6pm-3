@@ -2,16 +2,11 @@
 
 [![codecov](https://codecov.io/gh/ucsb-cs156-s22/team03-s22-6pm-3/branch/main/graph/badge.svg?token=VJ2yKRoeAW)](https://codecov.io/gh/ucsb-cs156-s22/team03-s22-6pm-3)
 
-
-TODO: Add a link to the deployed Heroku app for your team here, e.g.
-
 * <https://s22-6pm-3-team02.herokuapp.com>
-* 
+* <https://s22-6pm-3-team02-qa.herokuapp.com>
 
 * Storybook (production): <https://ucsb-cs156-s22.github.io/team03-s22-6pm-3-docs>
 * Storybook (development/qa): <https://ucsb-cs156-s22.github.io/team03-s22-6pm-3-docs-qa>
-
-TODO: Leave the results of the TODOS, but remove all of the TODO instructions from the readme.
 
 # Setup before running application
 
